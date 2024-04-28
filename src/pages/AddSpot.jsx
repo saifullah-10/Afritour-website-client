@@ -2,10 +2,17 @@ import { TextField } from "@mui/material";
 import Lottie from "lottie-react";
 import groovyWalkAnimation from "../lottiefiles/deer.json";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { Context } from "../routeControles/ContextServer";
 
 export default function AddSpot() {
+  const { user } = useContext(Context);
+
+  const { uid } = user;
+
   const { register, handleSubmit } = useForm();
   const submit = (data) => {
+    data.uid = uid;
     fetch("http://localhost:5000/places", {
       method: "POST",
       headers: { "content-type": "application/json" },
