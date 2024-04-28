@@ -1,1 +1,3 @@
 - React Simple Typewriter
+- lottie React
+- React Hook Form

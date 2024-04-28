@@ -1,12 +1,19 @@
 import { Typewriter } from "react-simple-typewriter";
 import Slider from "../components/slider/Slider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../routeControles/ContextServer";
 import { FaAnglesDown } from "react-icons/fa6";
 import "./commonStyle/down-arrow.css";
 import TouristCard from "../components/Header/TouristCard";
 import Countries from "../components/Header/Countries";
 export default function Home() {
+  const [placeData, setPlaceData] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/places/6")
+      .then((res) => res.json())
+      .then((data) => setPlaceData(data));
+  }, []);
+
   const { mode } = useContext(Context);
   return (
     <section className=" lg:mt-4 font-Poppins ">
@@ -77,12 +84,9 @@ export default function Home() {
           </p>
         </div>
         <div className=" grid lg:grid-cols-3 md:grid-cols-2 justify-items-center gap-10">
-          <TouristCard />
-          <TouristCard />
-          <TouristCard />
-          <TouristCard />
-          <TouristCard />
-          <TouristCard />
+          {placeData?.map((place) => (
+            <TouristCard key={place._id} place={place} />
+          ))}
         </div>
       </div>
       {/* start countries  */}

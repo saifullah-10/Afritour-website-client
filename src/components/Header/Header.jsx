@@ -21,6 +21,7 @@ import Search from "@mui/icons-material/Search";
 import Mode from "./Mode";
 import { Context } from "../../routeControles/ContextServer";
 import Logo from "../../assets/images/logo.png";
+import { Link, NavLink } from "react-router-dom";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Header() {
@@ -151,18 +152,41 @@ function Header() {
                   }}
                 >
                   <ListItemButton sx={{ fontWeight: "lg", color: "black" }}>
-                    Home
+                    <Link to={"/"} className=" w-full text-center">
+                      {" "}
+                      Home
+                    </Link>
                   </ListItemButton>
-                  <ListItemButton>About</ListItemButton>
-                  <ListItemButton>Studio</ListItemButton>
-                  <ListItemButton>Contact</ListItemButton>
+
+                  <ListItemButton>
+                    <Link to={"/allspot"} className=" w-full text-center">
+                      {" "}
+                      All Tourists Spot
+                    </Link>
+                  </ListItemButton>
+                  <ListItemButton>
+                    <Link to={"/addspot"} className=" w-full text-center">
+                      {" "}
+                      Add Tourists Spot
+                    </Link>
+                  </ListItemButton>
+                  <ListItemButton>
+                    <Link to={"/mylist"} className=" w-full text-center">
+                      {" "}
+                      My List
+                    </Link>
+                  </ListItemButton>
                   <div className=" w-full flex flex-col gap-2">
-                    <Button className="  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
-                      Log In
-                    </Button>
-                    <Button className=" !bg-green-500 hover:!bg-green-400 text-lg lg:!text-xl !text-white lg:!mt-2">
-                      Register
-                    </Button>
+                    <NavLink to={"/signin"}>
+                      <Button className=" w-full  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
+                        Log In
+                      </Button>
+                    </NavLink>
+                    <NavLink to={"/signup"}>
+                      <Button className=" w-full !bg-green-500 hover:!bg-green-400 text-lg lg:!text-xl !text-white lg:!mt-2">
+                        Register
+                      </Button>
+                    </NavLink>
                   </div>
                 </List>
               </Drawer>
@@ -193,52 +217,65 @@ function Header() {
               display: { xs: "none", lg: "flex" },
             }}
           >
-            <Button
-              sx={{
-                my: 2,
-                color: mode === "light" ? "black" : "white",
-                display: "block",
-              }}
-            >
-              Home
-            </Button>
-            <Button
-              sx={{
-                my: 2,
-                color: mode === "light" ? "black" : "white",
-                display: "block",
-              }}
-            >
-              All Tourists Spot
-            </Button>
-            <Button
-              sx={{
-                my: 2,
-                color: mode === "light" ? "black" : "white",
-                display: "block",
-              }}
-            >
-              Add Tourists Spot
-            </Button>
-            <Button
-              sx={{
-                my: 2,
-                color: mode === "light" ? "black" : "white",
-                display: "block",
-              }}
-            >
-              My List
-            </Button>
+            <NavLink to={"/"}>
+              {" "}
+              <Button
+                sx={{
+                  my: 2,
+                  color: mode === "light" ? "black" : "white",
+                  display: "block",
+                }}
+              >
+                Home
+              </Button>
+            </NavLink>
+            <NavLink to={"/allspot"}>
+              <Button
+                sx={{
+                  my: 2,
+                  color: mode === "light" ? "black" : "white",
+                  display: "block",
+                }}
+              >
+                All Tourists Spot
+              </Button>
+            </NavLink>
+            <NavLink to={"/addspot"}>
+              <Button
+                sx={{
+                  my: 2,
+                  color: mode === "light" ? "black" : "white",
+                  display: "block",
+                }}
+              >
+                Add Tourists Spot
+              </Button>
+            </NavLink>
+            <NavLink to={"/mylist"}>
+              <Button
+                sx={{
+                  my: 2,
+                  color: mode === "light" ? "black" : "white",
+                  display: "block",
+                }}
+              >
+                My List
+              </Button>
+            </NavLink>
           </Box>
           <Mode />
           <Box sx={{ display: { lg: "flex", md: "none", xs: "none" } }}>
             <div className=" hidden lg:block  ">
-              <Button className="  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
-                Log In
-              </Button>
-              <Button className=" !bg-green-500 hover:!bg-green-400 text-lg lg:!text-xl !text-white lg:!ml-2">
-                Register
-              </Button>
+              <NavLink to={"/signin"}>
+                <Button className="  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
+                  Log In
+                </Button>
+              </NavLink>
+              <NavLink to={"/signup"}>
+                <Button className=" !bg-green-500 hover:!bg-green-400 text-lg lg:!text-xl !text-white lg:!ml-2">
+                  Register
+                </Button>
+              </NavLink>
             </div>
           </Box>
 
