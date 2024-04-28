@@ -2,31 +2,16 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+
+import { FaGithub } from "react-icons/fa";
 import Grid from "@mui/material/Grid";
+import { FaGoogle } from "react-icons/fa";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { Link } from "react-router-dom";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -44,7 +29,11 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{ border: "2px solid", p: 4, borderRadius: 5, mt: 2 }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -101,9 +90,13 @@ export default function SignIn() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    gap: 1,
+                  }}
                 >
-                  Sign In
+                  <FaGoogle className=" text-2xl" /> <p>Google</p>
                 </Button>
               </Grid>
               <Grid item xs>
@@ -111,27 +104,24 @@ export default function SignIn() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ mt: 3, mb: 2, gap: 1 }}
                 >
-                  Sign In
+                  <FaGithub className=" text-2xl" /> <p>Github Login</p>
                 </Button>
               </Grid>
             </Grid>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              <Grid item xs></Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link to={"/signup"} variant="body2">
+                  <p className=" text-blue-700">
+                    {"Don't have an account? Sign Up"}
+                  </p>
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
