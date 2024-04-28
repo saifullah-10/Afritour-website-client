@@ -25,6 +25,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Header() {
   const { mode } = useContext(Context);
+
   const [open, setOpen] = useState(false);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -38,7 +39,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky" className="lg:mt-5 mt-3">
       <Container
         maxWidth="xl"
         sx={{
@@ -71,18 +72,18 @@ function Header() {
             <img width={150} src={Logo} alt="" />
           </Typography>
 
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: "flex", lg: "none" } }}>
             <div>
               <IconButton
                 variant="outlined"
-                className=" relative "
+                className=" relative"
                 color="neutral"
                 onClick={() => setOpen(true)}
               >
                 <LuMenu
-                  className={`text-3xl text-${
-                    mode === "light" ? "black" : "white"
-                  }`}
+                  className={`text-3xl ${
+                    mode == "light" ? "text-black" : "text-white"
+                  } `}
                 />
               </IconButton>
               <Drawer open={open} onClose={() => setOpen(false)}>
@@ -155,6 +156,14 @@ function Header() {
                   <ListItemButton>About</ListItemButton>
                   <ListItemButton>Studio</ListItemButton>
                   <ListItemButton>Contact</ListItemButton>
+                  <div className=" w-full flex flex-col gap-2">
+                    <Button className="  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
+                      Log In
+                    </Button>
+                    <Button className=" !bg-green-500 hover:!bg-green-400 text-lg lg:!text-xl !text-white lg:!mt-2">
+                      Register
+                    </Button>
+                  </div>
                 </List>
               </Drawer>
             </div>
@@ -181,7 +190,7 @@ function Header() {
 
           <Box
             sx={{
-              display: { xs: "none", md: "flex" },
+              display: { xs: "none", lg: "flex" },
             }}
           >
             <Button
@@ -221,8 +230,19 @@ function Header() {
               My List
             </Button>
           </Box>
+          <Mode />
+          <Box sx={{ display: { lg: "flex", md: "none", xs: "none" } }}>
+            <div className=" hidden lg:block  ">
+              <Button className="  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
+                Log In
+              </Button>
+              <Button className=" !bg-green-500 hover:!bg-green-400 text-lg lg:!text-xl !text-white lg:!ml-2">
+                Register
+              </Button>
+            </div>
+          </Box>
 
-          <Box sx={{}}>
+          {/* <Box>
             <Mode></Mode>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -251,7 +271,7 @@ function Header() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>

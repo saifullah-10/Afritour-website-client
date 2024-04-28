@@ -1,27 +1,49 @@
 import { Typewriter } from "react-simple-typewriter";
 import Slider from "../components/slider/Slider";
-
+import { useContext } from "react";
+import { Context } from "../routeControles/ContextServer";
+import { FaAnglesDown } from "react-icons/fa6";
+import "./commonStyle/down-arrow.css";
+import TouristCard from "../components/Header/TouristCard";
+import Countries from "../components/Header/Countries";
 export default function Home() {
+  const { mode } = useContext(Context);
   return (
-    <section className=" lg:mt-4">
-      <div className=" flex ">
-        <div className=" lg:w-1/2">
-          <h1>Welcome To AfriTourism</h1>
-          <div>
+    <section className=" lg:mt-4 font-Poppins ">
+      <div className=" lg:flex lg:px-20 ">
+        <div className=" lg:w-1/2 lg:py-40 py-10">
+          <h1 className=" text-2xl lg:text-4xl font-bold text-center lg:text-left ">
+            Welcome To AfriTour
+          </h1>
+          <div className="">
             <h1
+              className=" lg:text-left text-center lg:py-4 py-3"
               style={{
                 margin: "auto 0",
                 fontWeight: "normal",
               }}
             >
               {" "}
-              <span style={{ color: "red", fontWeight: "bold" }}>
+              <span
+                style={{
+                  color: mode === "light" ? "black" : "yellow",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                }}
+              >
                 {/* Style will be inherited from the parent element */}
                 <Typewriter
-                  words={["Eat", "Sleep", "Code", "Repeat!"]}
+                  words={[
+                    "South Africa",
+                    "Tanzania",
+                    "Kenya",
+                    "Morocco",
+                    "Egypt",
+                    "Namibia",
+                  ]}
                   loop={false}
                   cursor
-                  cursorStyle="_"
+                  cursorStyle="|"
                   typeSpeed={70}
                   deleteSpeed={50}
                   delaySpeed={1000}
@@ -29,9 +51,57 @@ export default function Home() {
               </span>
             </h1>
           </div>
+          <div>
+            <p className=" lg:pr-10 text-center lg:text-left">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+              quibusdam iste adipisci hic reiciendis! Earum beatae eveniet
+              pariatur blanditiis molestiae.
+            </p>
+          </div>
+          <div className="down-arrow left-60 bottom-24 text-4xl lg:block hidden ">
+            <FaAnglesDown />
+          </div>
         </div>
-        <div className=" w-1/2">
+        <div className=" lg:w-1/2">
           <Slider></Slider>
+        </div>
+      </div>
+      {/* start tourist places */}
+      <div className=" mt-10 lg:mt-20">
+        <div className="lg:py-10 py-5">
+          <h1 className=" lg:text-4xl text-2xl font-bold  text-center">
+            Our Package
+          </h1>
+          <p className=" text-center lg:pt-2">
+            Our Best Packages With Best Price
+          </p>
+        </div>
+        <div className=" grid lg:grid-cols-3 md:grid-cols-2 justify-items-center gap-10">
+          <TouristCard />
+          <TouristCard />
+          <TouristCard />
+          <TouristCard />
+          <TouristCard />
+          <TouristCard />
+        </div>
+      </div>
+      {/* start countries  */}
+      <div className=" mt-10 lg:mt-20">
+        <div className="lg:py-10 py-5">
+          <h1 className=" lg:text-4xl text-2xl font-bold  text-center">
+            Countries
+          </h1>
+          <p className=" text-center lg:pt-2">
+            Those Countries We Are Currently Working
+          </p>
+        </div>
+        <div className=" grid lg:grid-cols-3 md:grid-cols-2 justify-items-center gap-10">
+          <Countries />
+          <Countries />
+          <Countries />
+          <Countries />
+          <Countries />
+          <Countries />
         </div>
       </div>
     </section>

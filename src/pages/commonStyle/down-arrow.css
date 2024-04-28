@@ -1,0 +1,19 @@
+.down-arrow {
+  width: 0;
+  height: 30px;
+  position: absolute;
+  border-radius: 2px;
+  animation: jumpInfinite 1.5s infinite;
+}
+
+@keyframes jumpInfinite {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
