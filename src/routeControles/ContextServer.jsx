@@ -1,11 +1,36 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { onAuthStateChanged } from "firebase/auth";
+import auth from "../firebase/firebase";
 export const Context = createContext(null);
 export default function ContextServer({ children }) {
+  const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
+
   const [mode, setMode] = useState("light");
-  document.querySelector("html").setAttribute("data-theme", mode);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        setLoading(false);
+      } else {
+        console.log("User not found");
+        setLoading(false);
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", mode);
+  }, [mode]);
   return (
-    <Context.Provider value={{ mode, setMode }}>{children}</Context.Provider>
+    <Context.Provider value={{ mode, setMode, user, setUser, loading }}>
+      {children}
+    </Context.Provider>
   );
 }
 

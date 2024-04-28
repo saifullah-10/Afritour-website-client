@@ -15,7 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../firebase/firebase";
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -23,12 +23,14 @@ import auth from "../firebase/firebase";
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const handleGithubLogin = () => {
     const provider = new GithubAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/");
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -36,12 +38,12 @@ export default function SignIn() {
       });
   };
   const handleGoogleLogin = () => {
-    console.log("login");
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/");
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -50,11 +52,9 @@ export default function SignIn() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // const data = new FormData(event.currentTarget);
+    // const email = data.get("email");
+    // const password = data.get("password");
   };
 
   return (

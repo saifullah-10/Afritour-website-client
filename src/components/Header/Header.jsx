@@ -22,13 +22,14 @@ import Mode from "./Mode";
 import { Context } from "../../routeControles/ContextServer";
 import Logo from "../../assets/images/logo.png";
 import { Link, NavLink } from "react-router-dom";
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { signOut } from "firebase/auth";
+import auth from "../../firebase/firebase";
 
 function Header() {
-  const { mode } = useContext(Context);
-
+  const { mode, user, setUser } = useContext(Context);
+  const { photoURL, displayName } = user || {};
   const [open, setOpen] = useState(false);
-
+  console.log(photoURL);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -37,6 +38,15 @@ function Header() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("sign Out");
+        setUser(null);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -164,18 +174,22 @@ function Header() {
                       All Tourists Spot
                     </Link>
                   </ListItemButton>
-                  <ListItemButton>
-                    <Link to={"/addspot"} className=" w-full text-center">
-                      {" "}
-                      Add Tourists Spot
-                    </Link>
-                  </ListItemButton>
-                  <ListItemButton>
-                    <Link to={"/mylist"} className=" w-full text-center">
-                      {" "}
-                      My List
-                    </Link>
-                  </ListItemButton>
+                  {user && (
+                    <ListItemButton>
+                      <Link to={"/addspot"} className=" w-full text-center">
+                        {" "}
+                        Add Tourists Spot
+                      </Link>
+                    </ListItemButton>
+                  )}
+                  {user && (
+                    <ListItemButton>
+                      <Link to={"/mylist"} className=" w-full text-center">
+                        {" "}
+                        My List
+                      </Link>
+                    </ListItemButton>
+                  )}
                   <div className=" w-full flex flex-col gap-2">
                     <NavLink to={"/signin"}>
                       <Button className=" w-full  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
@@ -240,75 +254,86 @@ function Header() {
                 All Tourists Spot
               </Button>
             </NavLink>
-            <NavLink to={"/addspot"}>
-              <Button
-                sx={{
-                  my: 2,
-                  color: mode === "light" ? "black" : "white",
-                  display: "block",
-                }}
-              >
-                Add Tourists Spot
-              </Button>
-            </NavLink>
-            <NavLink to={"/mylist"}>
-              <Button
-                sx={{
-                  my: 2,
-                  color: mode === "light" ? "black" : "white",
-                  display: "block",
-                }}
-              >
-                My List
-              </Button>
-            </NavLink>
+            {user && (
+              <NavLink to={"/addspot"}>
+                <Button
+                  sx={{
+                    my: 2,
+                    color: mode === "light" ? "black" : "white",
+                    display: "block",
+                  }}
+                >
+                  Add Tourists Spot
+                </Button>
+              </NavLink>
+            )}
+            {user && (
+              <NavLink to={"/mylist"}>
+                <Button
+                  sx={{
+                    my: 2,
+                    color: mode === "light" ? "black" : "white",
+                    display: "block",
+                  }}
+                >
+                  My List
+                </Button>
+              </NavLink>
+            )}
           </Box>
           <Mode />
-          <Box sx={{ display: { lg: "flex", md: "none", xs: "none" } }}>
-            <div className=" hidden lg:block  ">
-              <NavLink to={"/signin"}>
-                <Button className="  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
-                  Log In
-                </Button>
-              </NavLink>
-              <NavLink to={"/signup"}>
-                <Button className=" !bg-green-500 hover:!bg-green-400 text-lg lg:!text-xl !text-white lg:!ml-2">
-                  Register
-                </Button>
-              </NavLink>
-            </div>
-          </Box>
-
-          {/* <Box>
-            <Mode></Mode>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+          {!user ? (
+            <Box sx={{ display: { lg: "flex", md: "none", xs: "none" } }}>
+              <div className=" hidden lg:block  ">
+                <NavLink to={"/signin"}>
+                  <Button className="  !bg-green-500 hover:!bg-green-400 lg:!text-xl !text-white">
+                    Log In
+                  </Button>
+                </NavLink>
+                <NavLink to={"/signup"}>
+                  <Button className=" !bg-green-500 hover:!bg-green-400 text-lg lg:!text-xl !text-white lg:!ml-2">
+                    Register
+                  </Button>
+                </NavLink>
+              </div>
+            </Box>
+          ) : (
+            <Box>
+              <Tooltip title={displayName}>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt={displayName} src={photoURL} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography sx={{ width: "100%" }}>Profile</Typography>
                 </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography sx={{ width: "100%" }}>Update Profile</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography sx={{ width: "100%" }} onClick={handleLogout}>
+                    Logout
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
