@@ -2,7 +2,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+} from "firebase/auth";
 import { FaGithub } from "react-icons/fa";
 import Grid from "@mui/material/Grid";
 import { FaGoogle } from "react-icons/fa";
@@ -12,12 +16,38 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import auth from "../firebase/firebase";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const handleGithubLogin = () => {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => {
+        const errorMessage = err.message;
+        console.log(errorMessage);
+      });
+  };
+  const handleGoogleLogin = () => {
+    console.log("login");
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => {
+        const errorMessage = err.message;
+        console.log(errorMessage);
+      });
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -87,7 +117,7 @@ export default function SignIn() {
             <Grid container sx={{ gap: "20px" }}>
               <Grid item xs>
                 <Button
-                  type="submit"
+                  onClick={handleGoogleLogin}
                   fullWidth
                   variant="contained"
                   sx={{
@@ -101,7 +131,7 @@ export default function SignIn() {
               </Grid>
               <Grid item xs>
                 <Button
-                  type="submit"
+                  onClick={handleGithubLogin}
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2, gap: 1 }}
