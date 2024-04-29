@@ -30,7 +30,7 @@ function Header() {
   const { mode, user, setUser } = useContext(Context);
   const { photoURL, displayName } = user || {};
   const [open, setOpen] = useState(false);
-  console.log(photoURL);
+
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
