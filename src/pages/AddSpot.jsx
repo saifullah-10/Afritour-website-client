@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { Context } from "../routeControles/ContextServer";
 
 export default function AddSpot() {
-  const { user } = useContext(Context);
+  const { user, setCurrentData } = useContext(Context);
 
   const { uid } = user;
 
@@ -19,7 +19,7 @@ export default function AddSpot() {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setCurrentData(data));
   };
   return (
     <div className=" mt-5 flex lg:my-10 my-8">

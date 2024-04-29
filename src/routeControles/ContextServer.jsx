@@ -6,6 +6,8 @@ export const Context = createContext(null);
 export default function ContextServer({ children }) {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [allData, setAllData] = useState([]);
+  const [currentData, setCurrentData] = useState(null);
 
   const [mode, setMode] = useState("light");
 
@@ -23,12 +25,31 @@ export default function ContextServer({ children }) {
       unsubscribe();
     };
   });
-
+  console.log(allData);
+  useEffect(() => {
+    fetch("http://localhost:5000/places")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllData(data);
+      });
+  }, [currentData]);
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", mode);
   }, [mode]);
   return (
-    <Context.Provider value={{ mode, setMode, user, setUser, loading }}>
+    <Context.Provider
+      value={{
+        mode,
+        setMode,
+        user,
+        setUser,
+        currentData,
+        setCurrentData,
+        allData,
+        setAllData,
+        loading,
+      }}
+    >
       {children}
     </Context.Provider>
   );

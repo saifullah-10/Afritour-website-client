@@ -21,11 +21,12 @@ import Search from "@mui/icons-material/Search";
 import Mode from "./Mode";
 import { Context } from "../../routeControles/ContextServer";
 import Logo from "../../assets/images/logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import auth from "../../firebase/firebase";
 
 function Header() {
+  const navigate = useNavigate();
   const { mode, user, setUser } = useContext(Context);
   const { photoURL, displayName } = user || {};
   const [open, setOpen] = useState(false);
@@ -45,6 +46,7 @@ function Header() {
       .then(() => {
         console.log("sign Out");
         setUser(null);
+        navigate("/");
       })
       .catch((err) => console.error(err));
   };
