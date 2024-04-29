@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GoPersonFill } from "react-icons/go";
 import { FaLocationDot } from "react-icons/fa6";
+import { IoTimerOutline } from "react-icons/io5";
 import { FaCloud } from "react-icons/fa6";
 export default function PackageDeatils() {
   const [data, setData] = useState(null);
@@ -14,6 +15,7 @@ export default function PackageDeatils() {
     season,
     spotName,
     totalVisitor,
+    travelTime,
   } = data || {};
   const { id } = useParams();
   useEffect(() => {
@@ -41,6 +43,10 @@ export default function PackageDeatils() {
             <div className=" flex items-center gap-2">
               <FaCloud />
               <p>{season}</p>
+            </div>
+            <div className=" flex items-center gap-2">
+              <IoTimerOutline />
+              <p>{travelTime} Days</p>
             </div>
           </div>
           <div>

@@ -9,7 +9,8 @@ export default function ContextServer({ children }) {
   const [allData, setAllData] = useState([]);
   const [currentData, setCurrentData] = useState(null);
   const [userData, setUserData] = useState([]);
-  const [updateDate, setUpdateData] = useState(null);
+  const [updateData, setUpdateData] = useState(null);
+  const [deleteData, setDeleteData] = useState(null);
 
   useEffect(() => {
     const currentUserData = allData.filter((data) => data?.uid === user?.uid);
@@ -39,7 +40,7 @@ export default function ContextServer({ children }) {
       .then((data) => {
         setAllData(data);
       });
-  }, [currentData]);
+  }, [currentData, updateData, deleteData]);
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", mode);
   }, [mode]);
@@ -56,8 +57,9 @@ export default function ContextServer({ children }) {
         setAllData,
         loading,
         userData,
-        updateDate,
+        updateData,
         setUpdateData,
+        setDeleteData,
       }}
     >
       {children}

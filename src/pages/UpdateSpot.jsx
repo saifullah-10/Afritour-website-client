@@ -1,9 +1,12 @@
 import { TextField } from "@mui/material";
-import { useEffect } from "react";
+import { useContext } from "react";
+
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { Context } from "../routeControles/ContextServer";
 
 export default function UpdateSpot() {
+  const { setUpdateData } = useContext(Context);
   const id = useParams();
   const { register, handleSubmit } = useForm();
   const submit = (data) => {
@@ -14,15 +17,12 @@ export default function UpdateSpot() {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        setUpdateData(data);
+      })
+      .catch((err) => console.log(err));
   };
-
-  console.log(id.id);
-  useEffect(() => {
-    fetch(`http://localhost:5000/places/id/${id.id}`)
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  });
 
   return (
     <div className=" lg:my-10">

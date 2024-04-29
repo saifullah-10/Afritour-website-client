@@ -10,7 +10,19 @@ import { Context } from "../routeControles/ContextServer";
 import { Link } from "react-router-dom";
 
 export default function MyList() {
-  const { userData } = useContext(Context);
+  const { userData, setDeleteData } = useContext(Context);
+
+  const deleteUsers = (id) => {
+    fetch(`http://localhost:5000/places/delete/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setDeleteData(data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -86,7 +98,10 @@ export default function MyList() {
                           Update
                         </button>
                       </Link>
-                      <button className=" px-2 py-1 bg-red-500 text-white text-bold rounded-lg ">
+                      <button
+                        onClick={() => deleteUsers(data._id)}
+                        className=" px-2 py-1 bg-red-500 text-white text-bold rounded-lg "
+                      >
                         Delete
                       </button>
                     </div>
