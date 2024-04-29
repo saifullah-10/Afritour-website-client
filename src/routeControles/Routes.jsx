@@ -9,6 +9,7 @@ import AllSpot from "../pages/AllSpot";
 import AddSpot from "../pages/AddSpot";
 import MyList from "../pages/MyList";
 import PackageDeatils from "../pages/PackageDeatils";
+import UpdateSpot from "../pages/UpdateSpot";
 
 const routes = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const routes = createBrowserRouter([
       {
         path: "/places/:id",
         element: <PackageDeatils />,
+      },
+      {
+        path: "/update/:id",
+        element: <UpdateSpot></UpdateSpot>,
       },
     ],
   },

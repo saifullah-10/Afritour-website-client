@@ -8,6 +8,13 @@ export default function ContextServer({ children }) {
   const [loading, setLoading] = useState(true);
   const [allData, setAllData] = useState([]);
   const [currentData, setCurrentData] = useState(null);
+  const [userData, setUserData] = useState([]);
+  const [updateDate, setUpdateData] = useState(null);
+
+  useEffect(() => {
+    const currentUserData = allData.filter((data) => data?.uid === user?.uid);
+    setUserData(currentUserData);
+  }, [allData, user?.uid]);
 
   const [mode, setMode] = useState("light");
 
@@ -25,7 +32,7 @@ export default function ContextServer({ children }) {
       unsubscribe();
     };
   });
-  console.log(allData);
+  console.log(userData);
   useEffect(() => {
     fetch("http://localhost:5000/places")
       .then((res) => res.json())
@@ -48,6 +55,9 @@ export default function ContextServer({ children }) {
         allData,
         setAllData,
         loading,
+        userData,
+        updateDate,
+        setUpdateData,
       }}
     >
       {children}
