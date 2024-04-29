@@ -18,6 +18,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../firebase/firebase";
+import swal from "sweetalert";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -30,6 +31,7 @@ export default function SignIn() {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
+        swal("Success", "Login With Github", "success");
         console.log(user);
         navigate("/");
       })
@@ -44,6 +46,7 @@ export default function SignIn() {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        swal("Success", "Login With E-mail", "success");
         navigate("/");
       })
       .catch((err) => {
@@ -60,8 +63,17 @@ export default function SignIn() {
       .then(() => {
         console.log("login Success");
         navigate("/");
+        swal("Success", "", "success");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err.message);
+
+        if (/invalid-credential/g.test(err.message)) {
+          swal("Incorrect Email Or Password", "", "error");
+        } else {
+          swal("Something Went Wrong", "", "error");
+        }
+      });
   };
 
   return (

@@ -21,6 +21,7 @@ import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase";
+import swal from "sweetalert";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -39,12 +40,41 @@ export default function SignUp() {
     const photo = data.get("photo");
     const password = data.get("password");
     const email = data.get("email");
+    console.log(name);
+    if (!name) {
+      swal("Please Provide Your Name", "", "error");
+      return;
+    }
+    if (
+      !/(?:https?|ftp):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/.test(
+        photo
+      )
+    ) {
+      swal("Please Provide A Valid Photo URL", "", "error");
+      return;
+    }
+    if (!/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password)) {
+      swal(
+        "Password Must Contain Uppercase And Lowercase Letters And Length Will Be 6 Digit",
+        "",
+        "error"
+      );
+      return;
+    }
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      swal("Please Provide A Valid Email", "", "error");
+      return;
+    }
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        updateProfile(auth.currentUser, { displayName: name, photoURL: photo })
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photo,
+        })
           .then(() => {
             console.log("Successfully");
             navigate("/");
+            swal("Registration Successfully", "", "success");
           })
           .catch((err) => console.log(err));
       })
