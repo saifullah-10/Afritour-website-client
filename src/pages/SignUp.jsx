@@ -9,7 +9,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FormControl,
   IconButton,
@@ -28,11 +28,12 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
     const name = data.get("name");
     const photo = data.get("photo");
@@ -41,7 +42,10 @@ export default function SignUp() {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         updateProfile(auth.currentUser, { displayName: name, photoURL: photo })
-          .then(() => console.log("Successfully"))
+          .then(() => {
+            console.log("Successfully");
+            navigate("/");
+          })
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));

@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { FaGithub } from "react-icons/fa";
 import Grid from "@mui/material/Grid";
@@ -52,9 +53,15 @@ export default function SignIn() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // const email = data.get("email");
-    // const password = data.get("password");
+    const data = new FormData(event.currentTarget);
+    const email = data.get("email");
+    const password = data.get("password");
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        console.log("login Success");
+        navigate("/");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
