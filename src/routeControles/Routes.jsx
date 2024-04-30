@@ -11,6 +11,7 @@ import MyList from "../pages/MyList";
 import PackageDeatils from "../pages/PackageDeatils";
 import UpdateSpot from "../pages/UpdateSpot";
 import CountrySpots from "../pages/CountrySpots";
+import ProtectedRoute from "../protectedRoute/ProtectedRoute";
 
 const routes = createBrowserRouter([
   {
@@ -44,7 +45,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/places/:id",
-        element: <PackageDeatils />,
+        element: (
+          <ProtectedRoute>
+            <PackageDeatils />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/update/:id",

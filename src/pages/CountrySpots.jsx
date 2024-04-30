@@ -7,7 +7,9 @@ export default function CountrySpots() {
   const country = useParams();
   console.log(country.country);
   useEffect(() => {
-    fetch(`http://localhost:5000/places/country/${country.country}`)
+    fetch(
+      `https://server-code-woad.vercel.app/places/country/${country.country}`
+    )
       .then((res) => res.json())
       .then((data) => setspots(data));
   }, [country.country]);

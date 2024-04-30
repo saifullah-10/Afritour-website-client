@@ -4,7 +4,7 @@ import { FaPerson } from "react-icons/fa6";
 import { IoPricetag } from "react-icons/io5";
 import { Link } from "react-router-dom";
 export default function TouristCard({ place }) {
-  const { _id, photoURL, spotName, countryName, totalVisitor, season, cost } =
+  const { _id, photoURL, travelTime, spotName, totalVisitor, season, cost } =
     place;
 
   return (
@@ -12,7 +12,7 @@ export default function TouristCard({ place }) {
       <div className="relative">
         <img className="w-full rounded-xl" src={photoURL} alt="Image" />
         <p className="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">
-          {countryName}
+          Travel Time: <span>{travelTime}</span> Days
         </p>
       </div>
       <h1 className="mt-4 text-gray-800 text-2xl font-bold cursor-pointer">

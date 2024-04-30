@@ -6,6 +6,8 @@ import { FaAnglesDown } from "react-icons/fa6";
 import "./commonStyle/down-arrow.css";
 import TouristCard from "../components/Header/TouristCard";
 import Countries from "../components/Header/Countries";
+import ClientReview from "../components/ClientReview";
+import Blogs from "../components/Blogs";
 
 export default function Home() {
   const [countries, setCountries] = useState([]);
@@ -13,7 +15,7 @@ export default function Home() {
   const { mode, setLoading } = useContext(Context);
 
   useEffect(() => {
-    fetch("http://localhost:5000/places/6")
+    fetch("https://server-code-woad.vercel.app/places/6")
       .then((res) => res.json())
       .then((data) => {
         setPlaceData(data);
@@ -22,7 +24,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/countries")
+    fetch("https://server-code-woad.vercel.app/countries")
       .then((res) => res.json())
       .then((data) => setCountries(data));
   }, []);
@@ -118,6 +120,18 @@ export default function Home() {
           {countries.map((data) => (
             <Countries key={data._id} data={data} />
           ))}
+        </div>
+        <div className=" lg:my-10 my-5">
+          <div className="text-center">
+            <h1 className=" text-center text-2xl lg:text-4xl font-bold ">
+              Our Blogs
+            </h1>
+            <p className=" py-3">Get Experiance From Here</p>
+          </div>
+          <Blogs />
+        </div>
+        <div>
+          <ClientReview />
         </div>
       </div>
     </section>

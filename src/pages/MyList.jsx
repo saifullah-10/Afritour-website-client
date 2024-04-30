@@ -22,7 +22,7 @@ export default function MyList() {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/places/delete/${id}`, {
+        fetch(`https://server-code-woad.vercel.app/places/delete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

@@ -24,7 +24,7 @@ export default function UpdateSpot() {
       return;
     }
     console.log(data);
-    fetch(`http://localhost:5000/places/update/${id.id}`, {
+    fetch(`https://server-code-woad.vercel.app/places/update/${id.id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

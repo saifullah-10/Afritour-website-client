@@ -31,7 +31,7 @@ export default function AddSpot() {
       return;
     }
     data.uid = uid;
-    fetch("http://localhost:5000/places", {
+    fetch("https://server-code-woad.vercel.app/places", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

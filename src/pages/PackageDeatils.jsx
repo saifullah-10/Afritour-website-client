@@ -19,7 +19,7 @@ export default function PackageDeatils() {
   } = data || {};
   const { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:5000/places/id/${id}`)
+    fetch(`https://server-code-woad.vercel.app/places/id/${id}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [id]);

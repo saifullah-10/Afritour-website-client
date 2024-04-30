@@ -16,7 +16,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../firebase/firebase";
 import swal from "sweetalert";
 
@@ -25,6 +25,8 @@ import swal from "sweetalert";
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const location = useLocation();
+  console.log(location);
   const navigate = useNavigate();
   const handleGithubLogin = () => {
     const provider = new GithubAuthProvider();
@@ -33,7 +35,7 @@ export default function SignIn() {
         const user = result.user;
         swal("Success", "Login With Github", "success");
         console.log(user);
-        navigate("/");
+        navigate(location?.state ? location?.state : "/");
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -47,7 +49,7 @@ export default function SignIn() {
         const user = result.user;
         console.log(user);
         swal("Success", "Login With E-mail", "success");
-        navigate("/");
+        navigate(location?.state ? location?.state : "/");
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -62,7 +64,7 @@ export default function SignIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         console.log("login Success");
-        navigate("/");
+        navigate(location?.state ? location?.state : "/");
         swal("Success", "", "success");
       })
       .catch((err) => {
@@ -81,7 +83,7 @@ export default function SignIn() {
       <Container
         component="main"
         maxWidth="xs"
-        sx={{ border: "2px solid", p: 4, borderRadius: 5, mt: 2 }}
+        sx={{ border: "2px solid #8671E7", p: 4, borderRadius: 5, mt: 2 }}
       >
         <CssBaseline />
         <Box

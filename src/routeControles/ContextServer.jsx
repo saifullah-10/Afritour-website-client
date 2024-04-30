@@ -35,7 +35,7 @@ export default function ContextServer({ children }) {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/places")
+    fetch("https://server-code-woad.vercel.app/places")
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);

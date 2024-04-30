@@ -95,7 +95,7 @@ export default function SignUp() {
       <Container
         component="main"
         maxWidth="xs"
-        sx={{ border: "2px solid", p: 4, borderRadius: 5, mt: 2 }}
+        sx={{ border: "2px solid #8671E7", p: 4, borderRadius: 5, mt: 2 }}
       >
         <CssBaseline />
         <Box
