@@ -72,9 +72,12 @@ export default function Home() {
           </div>
           <div>
             <p className=" lg:pr-10 text-center lg:text-left">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-              quibusdam iste adipisci hic reiciendis! Earum beatae eveniet
-              pariatur blanditiis molestiae.
+              Discover the heart of Africa with our expertly curated tours
+              across South Africa, Tanzania, Morocco, Namibia, Kenya, and Egypt.
+              Explore vibrant cultures, stunning landscapes, and diverse
+              wildlife. Embark on unforgettable adventures with our tailored
+              itineraries designed for every traveler. Experience Africa like
+              never before!
             </p>
           </div>
           <div className="down-arrow left-60 bottom-24 text-4xl lg:block hidden ">
