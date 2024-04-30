@@ -36,7 +36,7 @@ export default function AllSpot() {
           </ul>
         </div>
       </div>
-      <div className=" grid lg:grid-cols-3 md:grid-cols-2 lg:gap-10 gap6 mt-4 lg:mt-8">
+      <div className=" grid lg:grid-cols-3 md:grid-cols-2 lg:gap-10 gap-6 mt-4 lg:mt-8">
         {sortData.map((place) => (
           <TouristCard key={place._id} place={place} />
         ))}

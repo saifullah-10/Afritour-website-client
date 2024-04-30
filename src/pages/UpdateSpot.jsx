@@ -11,11 +11,14 @@ export default function UpdateSpot() {
   const { register, handleSubmit } = useForm();
   const submit = (data) => {
     console.log(data);
-    fetch(`http://localhost:5000/places/update/${id.id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://b9a10-server-side-saifullah-10.vercel.app/places/update/${id.id}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

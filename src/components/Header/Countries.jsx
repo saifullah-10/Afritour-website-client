@@ -1,100 +1,51 @@
-import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import { IoMdPricetag } from "react-icons/io";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import { FaLocationDot } from "react-icons/fa6";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-
-import { Button } from "@mui/material";
-
-const ExpandMore = styled((props) => {
-  const { ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
-export default function Countries() {
+import { PropTypes } from "prop-types";
+import { Link } from "react-router-dom";
+export default function Countries({ data }) {
+  const { image, country_name, description } = data;
   return (
-    <Card>
-      {/* <CardMedia
-        component="img"
-        height="194"
-        image="https://images.pexels.com/photos/3689859/pexels-photo-3689859.jpeg?auto=compress&cs=tinysrgb&w=600"
-        alt="Paella dish"
-      /> */}
-      <CardMedia height="194">
-        <div className=" grid grid-cols-2 gap-2 lg:p-3 p-1 ">
-          <img
-            className=" rounded-xl"
-            src="https://images.pexels.com/photos/3689859/pexels-photo-3689859.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt=""
-          />
-          <img
-            className=" rounded-xl"
-            src="https://images.pexels.com/photos/3689859/pexels-photo-3689859.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt=""
-          />
-
-          <img
-            className=" rounded-xl"
-            src="https://images.pexels.com/photos/3689859/pexels-photo-3689859.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt=""
-          />
-          <img
-            className=" rounded-xl"
-            src="https://images.pexels.com/photos/3689859/pexels-photo-3689859.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt=""
-          />
+    <Link to={`/countryspots/${country_name}`}>
+      <div>
+        <div className="w-full mx-auto">
+          <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-full dark:bg-gray-800 dark:border-gray-700">
+            <a href="#">
+              <img className="rounded-t-lg" src={image} alt="" />
+            </a>
+            <div className="p-5">
+              <a href="#">
+                <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
+                  {country_name}
+                </h5>
+              </a>
+              <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
+                <span className=" text-lg font-semibold">Description: </span>{" "}
+                {description}
+              </p>
+              {/* <a
+              href="#"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Read more
+              <svg
+                className="-mr-1 ml-2 h-4 w-4"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </a> */}
+            </div>
+          </div>
         </div>
-      </CardMedia>
-      <CardContent>
-        <div className=" lg:text-3xl text-xl font-semibold">
-          <p>Egypt</p>
-        </div>
-        <div className=" flex items-center gap-1 py-2">
-          <IoMdPricetag />
-          <p>
-            Package Price: <span>450 USD</span>
-          </p>
-        </div>
-        <div className=" flex items-center gap-1">
-          <FaLocationDot />
-          <span>Cairo, Egypt</span>
-        </div>
-      </CardContent>
-      <CardContent className=" !p-0 !pl-4">
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          className=" lg:!text-lg !font-medium"
-        >
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore>
-          <Button variant="text">View Details</Button>
-        </ExpandMore>
-      </CardActions>
-    </Card>
+      </div>
+    </Link>
   );
 }
+
+Countries.propTypes = {
+  data: PropTypes.obj,
+};

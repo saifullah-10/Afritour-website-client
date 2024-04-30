@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
+import swal from "sweetalert";
 import { useContext, useState } from "react";
 import Drawer from "@mui/joy/Drawer";
 import Input from "@mui/joy/Input";
@@ -47,6 +47,7 @@ function Header() {
         console.log("sign Out");
         setUser(null);
         navigate("/");
+        swal("Successfully Logout", "", "success");
       })
       .catch((err) => console.error(err));
   };

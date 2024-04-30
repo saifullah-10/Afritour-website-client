@@ -8,20 +8,39 @@ import Paper from "@mui/material/Paper";
 import { useContext } from "react";
 import { Context } from "../routeControles/ContextServer";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
 export default function MyList() {
   const { userData, setDeleteData } = useContext(Context);
 
   const deleteUsers = (id) => {
-    fetch(`http://localhost:5000/places/delete/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setDeleteData(data);
-      })
-      .catch((err) => console.log(err));
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        fetch(
+          `https://b9a10-server-side-saifullah-10.vercel.app/places/delete/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            swal("Success! Your file has been deleted!", {
+              icon: "success",
+            });
+            setDeleteData(data);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        swal("Your  file is safe!");
+      }
+    });
   };
 
   return (
@@ -72,7 +91,7 @@ export default function MyList() {
                   }}
                   align="center"
                 >
-                  Carbs&nbsp;(g)
+                  Update / Delete
                 </TableCell>
               </TableRow>
             </TableHead>

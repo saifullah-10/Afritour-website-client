@@ -6,12 +6,18 @@ import { FaAnglesDown } from "react-icons/fa6";
 import "./commonStyle/down-arrow.css";
 import TouristCard from "../components/Header/TouristCard";
 import Countries from "../components/Header/Countries";
+
 export default function Home() {
+  const [countries, setCountries] = useState([]);
   const [placeData, setPlaceData] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/places/6")
+    fetch("https://b9a10-server-side-saifullah-10.vercel.app/places/6")
       .then((res) => res.json())
       .then((data) => setPlaceData(data));
+
+    fetch("https://b9a10-server-side-saifullah-10.vercel.app/countries")
+      .then((res) => res.json())
+      .then((data) => setCountries(data));
   }, []);
 
   const { mode } = useContext(Context);
@@ -100,12 +106,9 @@ export default function Home() {
           </p>
         </div>
         <div className=" grid lg:grid-cols-3 md:grid-cols-2 justify-items-center gap-10">
-          <Countries />
-          <Countries />
-          <Countries />
-          <Countries />
-          <Countries />
-          <Countries />
+          {countries.map((data) => (
+            <Countries key={data._id} data={data} />
+          ))}
         </div>
       </div>
     </section>

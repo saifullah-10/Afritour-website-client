@@ -10,6 +10,7 @@ import AddSpot from "../pages/AddSpot";
 import MyList from "../pages/MyList";
 import PackageDeatils from "../pages/PackageDeatils";
 import UpdateSpot from "../pages/UpdateSpot";
+import CountrySpots from "../pages/CountrySpots";
 
 const routes = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const routes = createBrowserRouter([
       {
         path: "/update/:id",
         element: <UpdateSpot></UpdateSpot>,
+      },
+      {
+        path: "/countryspots/:country",
+        element: <CountrySpots />,
       },
     ],
   },
