@@ -1,4 +1,7 @@
-Installed Packages: /
+Website Name: AfriTour
+Website URL: https://fir-auth-f0702.web.app/
+
+Installed Packages:
 
 - React Simple Typewriter
 - lottie React
@@ -6,7 +9,7 @@ Installed Packages: /
 - MUI
 - Swiper Js
 
-Category: Africa /
+Category: Africa
 
 - South Africa
 - Tanzania
