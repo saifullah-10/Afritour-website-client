@@ -78,7 +78,16 @@ export default function SignUp() {
           })
           .catch((err) => console.log(err));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        if (/email-already-in-use/g.test(err)) {
+          swal(
+            "Already Have An Account Try To Login With Google Or Github",
+            "",
+            "error"
+          );
+        }
+      });
   };
 
   return (
@@ -101,7 +110,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Registration
           </Typography>
           <Box
             component="form"
@@ -180,7 +189,7 @@ export default function SignUp() {
                 <Link to={"/signin"} variant="body2">
                   <p className=" text-blue-700">
                     {" "}
-                    Already have an account? Sign in
+                    Already have an account? Login
                   </p>
                 </Link>
               </Grid>

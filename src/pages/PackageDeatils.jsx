@@ -19,7 +19,7 @@ export default function PackageDeatils() {
   } = data || {};
   const { id } = useParams();
   useEffect(() => {
-    fetch(`https://b9a10-server-side-saifullah-10.vercel.app/places/id/${id}`)
+    fetch(`http://localhost:5000/places/id/${id}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [id]);

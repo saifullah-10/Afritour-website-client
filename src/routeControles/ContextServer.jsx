@@ -33,9 +33,9 @@ export default function ContextServer({ children }) {
       unsubscribe();
     };
   });
-  console.log(userData);
+
   useEffect(() => {
-    fetch("https://b9a10-server-side-saifullah-10.vercel.app/places")
+    fetch("http://localhost:5000/places")
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
@@ -56,6 +56,7 @@ export default function ContextServer({ children }) {
         allData,
         setAllData,
         loading,
+        setLoading,
         userData,
         updateData,
         setUpdateData,

@@ -96,7 +96,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log In
           </Typography>
           <Box
             component="form"
@@ -164,7 +164,7 @@ export default function SignIn() {
               <Grid item>
                 <Link to={"/signup"} variant="body2">
                   <p className=" text-blue-700">
-                    {"Don't have an account? Sign Up"}
+                    {"Don't have an account? Registration"}
                   </p>
                 </Link>
               </Grid>

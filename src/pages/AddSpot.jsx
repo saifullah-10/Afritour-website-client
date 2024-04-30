@@ -31,7 +31,7 @@ export default function AddSpot() {
       return;
     }
     data.uid = uid;
-    fetch("https://b9a10-server-side-saifullah-10.vercel.app/places", {
+    fetch("http://localhost:5000/places", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import Footer from "./pages/Footer";
 import { useContext } from "react";
 import { Context } from "./routeControles/ContextServer";
-
+import loader from "./assets/loading.gif";
 export default function Root() {
   const { loading } = useContext(Context);
   return (
@@ -15,7 +15,9 @@ export default function Root() {
           <Footer></Footer>
         </div>
       ) : (
-        <div>Loading</div>
+        <div className=" w-full min-h-screen flex justify-center items-center">
+          <img src={loader} alt="" />
+        </div>
       )}
     </>
   );

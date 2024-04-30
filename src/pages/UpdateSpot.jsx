@@ -1,30 +1,44 @@
-import { TextField } from "@mui/material";
-import { useContext } from "react";
-
+import { useContext, useState } from "react";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { Context } from "../routeControles/ContextServer";
+import swal from "sweetalert";
 
 export default function UpdateSpot() {
   const { setUpdateData } = useContext(Context);
   const id = useParams();
+  const [countryName, setcountryName] = useState("");
+  const handleChange = (event) => {
+    setcountryName(event.target.value);
+  };
   const { register, handleSubmit } = useForm();
   const submit = (data) => {
+    data.countryName = countryName;
+    if (!data.countryName) {
+      swal("Please Provide A country", "", "error");
+      return;
+    }
     console.log(data);
-    fetch(
-      `https://b9a10-server-side-saifullah-10.vercel.app/places/update/${id.id}`,
-      {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(data),
-      }
-    )
+    fetch(`http://localhost:5000/places/update/${id.id}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setUpdateData(data);
+        swal("Updated", "", "success");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        swal("Something Wrong", "", "error");
+      });
   };
 
   return (
@@ -52,12 +66,34 @@ export default function UpdateSpot() {
               variant="outlined"
               {...register("spotName")}
             />
-            <TextField
+            {/* <TextField
               id="outlined-basic"
               label=" Spot Country Name"
               variant="outlined"
               {...register("countryName")}
-            />
+            /> */}
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Country Name
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                rules={{ required: "Country Name is required" }}
+                // value="Country Name"
+                label="Country Name"
+                // inputRef={register}
+                name="countryName"
+                onChange={handleChange}
+              >
+                <MenuItem value="South Africa">South Africa</MenuItem>
+                <MenuItem value="Tanzania">Tanzania</MenuItem>
+                <MenuItem value="Kenya">Kenya</MenuItem>
+                <MenuItem value="Morocco">Morocco</MenuItem>
+                <MenuItem value="Egypt">Egypt</MenuItem>
+                <MenuItem value="Namibia">Namibia</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               id="outlined-basic"
               label="Spot Location"

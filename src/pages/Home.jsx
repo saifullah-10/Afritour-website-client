@@ -10,17 +10,23 @@ import Countries from "../components/Header/Countries";
 export default function Home() {
   const [countries, setCountries] = useState([]);
   const [placeData, setPlaceData] = useState([]);
-  useEffect(() => {
-    fetch("https://b9a10-server-side-saifullah-10.vercel.app/places/6")
-      .then((res) => res.json())
-      .then((data) => setPlaceData(data));
+  const { mode, setLoading } = useContext(Context);
 
-    fetch("https://b9a10-server-side-saifullah-10.vercel.app/countries")
+  useEffect(() => {
+    fetch("http://localhost:5000/places/6")
+      .then((res) => res.json())
+      .then((data) => {
+        setPlaceData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/countries")
       .then((res) => res.json())
       .then((data) => setCountries(data));
   }, []);
 
-  const { mode } = useContext(Context);
   return (
     <section className=" lg:mt-4 font-Poppins ">
       <div className=" lg:flex lg:px-20 ">

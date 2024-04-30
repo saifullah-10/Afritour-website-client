@@ -22,12 +22,9 @@ export default function MyList() {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(
-          `https://b9a10-server-side-saifullah-10.vercel.app/places/delete/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`http://localhost:5000/places/delete/${id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
