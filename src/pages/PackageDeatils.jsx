@@ -29,7 +29,7 @@ export default function PackageDeatils() {
       <div className=" flex flex-col lg:flex-row gap-3 justify-between  lg:mt-16 mt-8">
         <div className=" lg:w-1/2 w-full order-1 lg:-order-1 my-auto ">
           <h1 className="lg:text-4xl text-3xl font-bold">{spotName}</h1>
-          <div className=" border-b-4 border-t-4 rounded-2xl p-4 lg:my-4 my-2">
+          <div className=" flex flex-col gap-2 border-b-4 border-t-4 rounded-2xl p-4 lg:my-4 my-2">
             <div className=" flex items-center gap-2">
               <FaLocationDot />
               <p>
@@ -46,7 +46,7 @@ export default function PackageDeatils() {
             </div>
             <div className=" flex items-center gap-2">
               <IoTimerOutline />
-              <p>{travelTime} Days</p>
+              <p> Travel Time: {travelTime} Days</p>
             </div>
           </div>
           <div>

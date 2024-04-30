@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import TouristCard from "../components/Header/TouristCard";
+import CountryCard from "../components/CountryCard";
 
 export default function CountrySpots() {
   const [spots, setspots] = useState([]);
@@ -22,7 +22,7 @@ export default function CountrySpots() {
       </div>
       <div className=" grid lg:grid-cols-3 gap-10 md:grid-cols-2 lg:mt-8">
         {spots.map((spot) => (
-          <TouristCard key={spot._id} place={spot} />
+          <CountryCard key={spot._id} place={spot} />
         ))}
       </div>
     </div>
