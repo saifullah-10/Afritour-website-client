@@ -1,8 +1,5 @@
 import { useEffect } from "react";
 
-{
-  /* <link href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" rel="stylesheet" /> */
-}
 import "keen-slider/keen-slider.min.css";
 import KeenSlider from "keen-slider";
 import ClientSaysCard from "./ClientSaysCard";

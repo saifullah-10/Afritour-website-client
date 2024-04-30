@@ -12,14 +12,13 @@ import Blogs from "../components/Blogs";
 export default function Home() {
   const [countries, setCountries] = useState([]);
   const [placeData, setPlaceData] = useState([]);
-  const { mode, setLoading } = useContext(Context);
+  const { mode } = useContext(Context);
 
   useEffect(() => {
     fetch("https://server-code-woad.vercel.app/places/6")
       .then((res) => res.json())
       .then((data) => {
         setPlaceData(data);
-        setLoading(false);
       });
   }, []);
 

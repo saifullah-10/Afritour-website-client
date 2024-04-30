@@ -11,7 +11,9 @@ export default function CountrySpots() {
       `https://server-code-woad.vercel.app/places/country/${country.country}`
     )
       .then((res) => res.json())
-      .then((data) => setspots(data));
+      .then((data) => {
+        setspots(data);
+      });
   }, [country.country]);
   return (
     <div className=" lg:my-10 my-5">
