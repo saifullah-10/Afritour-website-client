@@ -1,4 +1,4 @@
-Website Name: AfriTour
+Website Name: AfriTour /
 Website URL: https://fir-auth-f0702.web.app/
 
 Installed Packages:
