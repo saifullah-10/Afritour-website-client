@@ -4,7 +4,7 @@ Website URL: https://fir-auth-f0702.web.app/
 Installed Packages:
 
 - React Simple Typewriter
-- lottie React
+- Lottie React
 - React Hook Form
 - MUI
 - Swiper Js
