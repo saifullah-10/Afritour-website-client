@@ -17,11 +17,11 @@ Installed Packages:
 - MUI
 - Swiper Js
 
-Category: Africa
+How to run locally in your PC:
 
-- South Africa
-- Tanzania
-- Kenya
-- Morocco
-- Egypt
-- Namibia
+- First clone this repository
+- Install node modules
+- Install tailwind css
+- Install axios
+- Install tanstack query
+- Run this application 
